@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>GAY</title>
+</head>
+<body>
+    <!-- img, name, price, city, description, autor  -->
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Список товаров</title>
+        <style>
+            table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+            th, td {
+                border: 1px solid black;
+                padding: 8px;
+                text-align: left;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Список товаров</h1>
+    
+        <!-- Таблица для отображения товаров -->
+        <table id="productsTable">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Название</th>
+                    <th>Цена</th>
+                    <th>Город</th>
+                    <th>Описание</th>
+                    <th>Автор</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Здесь будут добавлены строки товаров -->
+            </tbody>
+        </table>
+    
+        <script>
+            // Функция для получения списка товаров через REST API
+            async function fetchProducts() {
+                try {
+                    const response = await fetch('http://localhost:8080/api/products');
+                    if (!response.ok) {
+                        throw new Error('Ошибка при получении товаров');
+                    }
+                    const products = await response.json();
+    
+                    // Отображаем товары в таблице
+                    const tableBody = document.querySelector('#productsTable tbody');
+                    tableBody.innerHTML = ''; // Очищаем таблицу
+                    products.forEach(product => {
+                        const row = document.createElement('tr');
+    
+                        const idCell = document.createElement('td');
+                        idCell.textContent = product.id;
+                        row.appendChild(idCell);
+    
+                        const nameCell = document.createElement('td');
+                        nameCell.textContent = product.name;
+                        row.appendChild(nameCell);
+    
+                        const priceCell = document.createElement('td');
+                        priceCell.textContent = product.price;
+                        row.appendChild(priceCell);
+    
+                        const cityCell = document.createElement('td');
+                        cityCell.textContent = product.city || 'Не указан';
+                        row.appendChild(cityCell);
+    
+                        const descriptionCell = document.createElement('td');
+                        descriptionCell.textContent = product.description || 'Без описания';
+                        row.appendChild(descriptionCell);
+    
+                        const authorNameCell = document.createElement('td');
+                        authorNameCell.textContent = product.authorName || 'Неизвестный автор';
+                        row.appendChild(authorNameCell);
+    
+                        tableBody.appendChild(row);
+                    });
+                } catch (error) {
+                    console.error('Ошибка:', error);
+                    alert('Не удалось загрузить список товаров');
+                }
+            }
+    
+            // Загружаем товары при загрузке страницы
+            window.onload = fetchProducts;
+            //hagagagaagagggggyy
+        </script>
+    </body>
+    </html>
+    
+</body>
+</html>
