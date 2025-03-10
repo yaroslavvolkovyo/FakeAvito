@@ -2,6 +2,7 @@ package com.example.FakeAvito.controllers;
 
 
 import com.example.FakeAvito.dto.ProductRequestDTO;
+import com.example.FakeAvito.dto.ProductResponseDTO;
 import com.example.FakeAvito.model.Product;
 import com.example.FakeAvito.service.AuthorService;
 import com.example.FakeAvito.service.ProductService;
@@ -36,8 +37,10 @@ public class ProductController {
 //    }
 
     @GetMapping("/get")
-    public List<Product> getAll() {
-        return productService.findAll();
+    public ResponseEntity<List<ProductResponseDTO>>getAll() {
+        List<ProductResponseDTO> dtos = productService.findAll();
+
+        return ResponseEntity.ok(dtos);
     }
 //id берется из url
     @GetMapping("/get/{id}")

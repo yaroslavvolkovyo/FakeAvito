@@ -1,5 +1,6 @@
 package com.example.FakeAvito.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -26,8 +27,9 @@ public class Product {
         this.author = author;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "author_id")
+    //@JsonIgnore
     private Author author;
 
     @Column(nullable = false)

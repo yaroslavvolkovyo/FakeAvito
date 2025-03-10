@@ -1,6 +1,7 @@
 package com.example.FakeAvito.service;
 
 import com.example.FakeAvito.dto.ProductRequestDTO;
+import com.example.FakeAvito.dto.ProductResponseDTO;
 import com.example.FakeAvito.model.Author;
 import com.example.FakeAvito.model.Product;
 import com.example.FakeAvito.repository.AuthorRepository;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ProductService {
@@ -49,8 +51,9 @@ public class ProductService {
         return productRepository.save(product);
     }
 
-    public List<Product> findAll() {
-        return productRepository.findAll();
+    public List<ProductResponseDTO> findAll() {
+        List<Product> products = productRepository.findAll();
+        return products.stream().map(ProductResponseDTO::new).collect(Collectors.toList());
     }
 
     public Product findById(Long id) {
