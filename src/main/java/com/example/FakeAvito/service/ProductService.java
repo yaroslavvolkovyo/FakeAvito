@@ -32,6 +32,7 @@ public class ProductService {
 //        productRepository.save(product);
 //    }
 
+
     @Transactional
     public Product createProduct(ProductRequestDTO requestDTO) {
         Author author = authorRepository.findById(requestDTO.getAuthorId())
@@ -40,9 +41,11 @@ public class ProductService {
         Product product = new Product();
         product.setName(requestDTO.getName());
         product.setPrice(requestDTO.getPrice());
+        product.setCity(requestDTO.getCity());
+        product.setDescription(requestDTO.getDescription());
         product.setAuthor(author);
 
-        author.addProduct(product); // Добавляем продукт к автору
+        author.addProduct(product); // Обновление связи
         return productRepository.save(product);
     }
 

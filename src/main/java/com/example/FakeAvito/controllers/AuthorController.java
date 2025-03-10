@@ -32,7 +32,7 @@ public class AuthorController {
     public void createAuthor(@Valid @RequestBody Author author) {
         authorService.save(author);
     }
-
+//id берется из url
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteAuthor(@PathVariable Long id) {
         try{

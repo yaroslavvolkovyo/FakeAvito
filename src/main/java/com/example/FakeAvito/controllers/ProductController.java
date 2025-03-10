@@ -3,6 +3,7 @@ package com.example.FakeAvito.controllers;
 
 import com.example.FakeAvito.dto.ProductRequestDTO;
 import com.example.FakeAvito.model.Product;
+import com.example.FakeAvito.service.AuthorService;
 import com.example.FakeAvito.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,9 +17,11 @@ import java.util.Optional;
 public class ProductController {
 
     ProductService productService;
+    AuthorService authorService;
     @Autowired
-    public ProductController(ProductService productService) {
+    public ProductController(ProductService productService, AuthorService authorService) {
         this.productService = productService;
+        this.authorService = authorService;
     }
 
     @PostMapping("/save")
@@ -36,7 +39,7 @@ public class ProductController {
     public List<Product> getAll() {
         return productService.findAll();
     }
-
+//id берется из url
     @GetMapping("/get/{id}")
     public Product getProduct(@PathVariable Long id) {
         return productService.findById(id);
